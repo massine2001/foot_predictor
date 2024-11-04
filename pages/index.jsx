@@ -59,7 +59,7 @@ const HomePage = () => {
         </motion.p>
 
         {/* Bouton de prédiction */}
-        <Link href="/prediction">
+        <Link href="/PredictionPage">
           <motion.button
             className="px-10 py-5 bg-gradient-to-r from-blue-500 via-blue-700 to-purple-500 text-lg font-semibold rounded-full shadow-lg hover:shadow-2xl transition-transform"
             whileHover={{
