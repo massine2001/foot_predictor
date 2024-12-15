@@ -135,4 +135,4 @@ const PlayerRanking = () => {
   );
 };
 
-export { PlayerValueChart, PlayerSearch, PlayerRanking };
+export default { PlayerValueChart, PlayerSearch, PlayerRanking };
