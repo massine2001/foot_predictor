@@ -45,7 +45,7 @@ const HomePage = () => {
           className="text-5xl md:text-7xl font-extrabold mb-6 text-center opacity-0"
           animate={controls}
         >
-          Prédisez les Scores de Matchs avec l'IA!
+          Prédictions des valeurs marchandes des joueurs en 2024 !
         </motion.h1>
 
         {/* Sous-titre */}
@@ -55,7 +55,7 @@ const HomePage = () => {
           animate={{ opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 2, delay: 1.2 }}
         >
-          Découvrez notre projet IA qui utilise les données de matchs pour anticiper les scores avec précision.
+          Découvrez notre projet IA qui utilise les données de matchs pour anticiper les valeurs des joueurs en 2024.
         </motion.p>
 
         {/* Bouton de prédiction */}
@@ -68,7 +68,7 @@ const HomePage = () => {
             }}
             whileTap={{ scale: 0.9 }}
           >
-            Lancez une Prédiction
+            Lancez la prédiction
           </motion.button>
         </Link>
       </div>
