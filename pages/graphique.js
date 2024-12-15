@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerValueChart } from './PlayerPages';
+import { PlayerValueChart } from '../public/PlayerPages';
 
 const Graphique = () => {
   return <PlayerValueChart />;
