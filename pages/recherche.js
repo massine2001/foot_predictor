@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerSearch } from './PlayerPages';
+import { PlayerSearch } from '../public/PlayerPages';
 
 const Recherche = () => {
   return <PlayerSearch />;
