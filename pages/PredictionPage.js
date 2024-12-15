@@ -1,73 +1,50 @@
 // Importations nécessaires
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
 
-const PredictionPage = () => {
-  const router = useRouter();
-  const [teamA, setTeamA] = useState('');
-  const [teamB, setTeamB] = useState('');
-  const [matchDate, setMatchDate] = useState('');
-  const [prediction, setPrediction] = useState(null);
-  const [loading, setLoading] = useState(false);
+const generateFakeData = (count) => {
+  const players = [];
+  for (let i = 1; i <= count; i++) {
+    players.push({
+      name: `Joueur ${i}`,
+      predictedValue: (Math.random() * 100).toFixed(2) + ' M€',
+    });
+  }
+  return players;
+};
 
-  const handlePredict = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.post('/api/predict', { teamA, teamB, matchDate });
-      setPrediction(response.data.prediction);
-    } catch (error) {
-      console.error('Erreur lors de la prédiction:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+const PlayerMarketTable = () => {
+  const [players, setPlayers] = useState([]);
+
+  useEffect(() => {
+    // Génération de données factices pour 1000 joueurs
+    const fakeData = generateFakeData(1000);
+    setPlayers(fakeData);
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
-      <h1 className="text-3xl md:text-5xl font-bold mb-8">Prédiction de Score</h1>
-      
-      <div className="flex flex-col space-y-4">
-        <input
-          type="text"
-          placeholder="Équipe A"
-          value={teamA}
-          onChange={(e) => setTeamA(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
-        />
-        
-        <input
-          type="text"
-          placeholder="Équipe B"
-          value={teamB}
-          onChange={(e) => setTeamB(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
-        />
+      <h1 className="text-3xl md:text-5xl font-bold mb-8">Valeurs Marchandes des Joueurs</h1>
 
-        <input
-          type="date"
-          value={matchDate}
-          onChange={(e) => setMatchDate(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
-        />
-        
-        <button
-          onClick={handlePredict}
-          className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-lg font-semibold"
-          disabled={loading}
-        >
-          {loading ? 'Prédiction en cours...' : 'Obtenir la Prédiction'}
-        </button>
+      <div className="overflow-x-auto w-full px-4">
+        <table className="table-auto w-full bg-gray-800 text-left border border-gray-700">
+          <thead className="bg-gray-700">
+            <tr>
+              <th className="px-4 py-2 border-b border-gray-600">Nom du Joueur</th>
+              <th className="px-4 py-2 border-b border-gray-600">Valeur Prédite (2024)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {players.map((player, index) => (
+              <tr key={index} className={index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}>
+                <td className="px-4 py-2 border-b border-gray-600">{player.name}</td>
+                <td className="px-4 py-2 border-b border-gray-600">{player.predictedValue}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-
-      {prediction && (
-        <div className="mt-8 p-4 bg-gray-800 rounded-lg">
-          <h2 className="text-xl font-bold">Score Prévu</h2>
-          <p>{teamA} : {prediction.teamAScore} - {teamB} : {prediction.teamBScore}</p>
-        </div>
-      )}
     </div>
   );
 };
 
-export default PredictionPage;
+export default PlayerMarketTable;
