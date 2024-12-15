@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerRanking } from './PlayerPages';
+import { PlayerRanking } from '../public/PlayerPages';
 
 const Classements = () => {
   return <PlayerRanking />;
